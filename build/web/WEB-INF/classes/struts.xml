@@ -1,0 +1,78 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <constant name="struts.custom.i18n.resources" value="hpes" />
+    <!--<constant name="struts.multipart.maxSize" value="50000000" />max size of the files uploaded -->
+    <constant name="struts.devMode" value="true"></constant>
+     <constant name="struts.action.extension" value=","/>  
+    
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>   
+        </result-types>
+        <interceptors>
+            <interceptor class="model.MyInterceptor" name="changeCase"/>    
+        </interceptors>
+        
+        
+        <action name="reg" class="model.Register">
+            <result>/register.jsp</result> 
+            <result name="input">/register.jsp</result>
+        </action>
+        
+        
+        <action name="calc" class="model.CalculatorAction">
+            <result type="freemarker">/hello.ftl</result>
+        </action>
+        
+        <action name="emp" class="model.EmpAction">
+            <interceptor-ref name="defaultStack"/>               
+            <interceptor-ref name="changeCase"/>  
+            <interceptor-ref name="timer" /> 
+            <result name="success">/employee.jsp</result>    
+            <result name="input">/employee.jsp</result>
+  
+        </action>
+        
+        <action name="cl">
+            <result>/register.jsp</result>    
+        </action>
+        
+        <action name="upload"
+                class="model.uploadFile">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">2097152</param>
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/pjpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">success.jsp</result>
+            <result name="input">error.jsp</result>
+        </action>
+        
+        <action name="loginform">  
+            <result>login.jsp</result>  
+        </action>  
+  
+        <action name="login" class="model.Login" method="execute">  
+            <result name="success">/login-success.jsp</result>  
+            <result name="login">/login-error.jsp</result>  
+        </action>  
+  
+        <action name="logout" class="model.Login" method="logout">  
+            <result name="success">/logout-success.jsp</result>  
+            <!--<result name="login">/index.html</result>-->
+        </action>  
+   
+        <action name="profile" class="model.Profile" method="execute">  
+            <result name="success">/profile-success.jsp</result>  
+            <result name="login">/profile-error.jsp</result>  
+        </action>  
+        
+    </package>
+</struts>

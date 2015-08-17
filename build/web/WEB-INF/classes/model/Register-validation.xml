@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+  <field name="name">    
+   <field-validator type="requiredstring"> 
+    <message>Enter Name</message>    
+   </field-validator>
+  </field>
+  <field name="dept">    
+   <field-validator type="requiredstring">
+    <message>Enter Detapartment</message>    
+   </field-validator>
+  </field>
+  <field name="mailid">    
+   <field-validator type="email">
+    <message>Invalid Email ID</message>    
+   </field-validator>
+  </field>
+  <field name="contact">    
+   <field-validator type="stringlength">
+    <param name="minLength">10</param>   
+    <param name="maxLength">13</param>   
+    <message>Contact Number length must be in 10 to 13</message>    
+   </field-validator>
+  </field>
+</validators>
